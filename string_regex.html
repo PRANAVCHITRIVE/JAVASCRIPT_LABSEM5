@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String and Regex Operations</title>
+</head>
+
+<body>
+
+<h1>String Functions & Regex Demo</h1>
+
+<label>Enter Email:</label>
+<input type="text" id="email">
+
+<br><br>
+
+<label>Enter Text:</label>
+<textarea id="text" rows="5" cols="40"></textarea>
+
+<br><br>
+
+<button onclick="analyzeData()">Analyze</button>
+
+<h2 id="result"></h2>
+
+
+<script>
+
+function analyzeData() {
+
+
+    let email = document.getElementById("email").value;
+
+    let text = document.getElementById("text").value;
+
+
+    try {
+
+
+        // Regex Email Validation
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
+        let emailStatus;
+
+        if(emailPattern.test(email)) {
+
+            emailStatus = "Valid Email ✅";
+
+        }
+
+        else {
+
+            emailStatus = "Invalid Email ❌";
+
+        }
+
+
+
+        // String Functions
+
+        let upperText = text.toUpperCase();
+
+        let lowerText = text.toLowerCase();
+
+
+        // Word count using split()
+        let words = text.trim().split(/\s+/);
+
+        let wordCount = words.length;
+
+
+
+        // Character count
+        let charCount = text.length;
+
+
+
+        // Extract numbers using Regex
+        let numbers = text.match(/\d+/g);
+
+
+        if(numbers == null) {
+            numbers = "No numbers found";
+        }
+        else {
+            numbers = numbers.join(", ");
+        }
+
+
+
+        // Extract email from text using Regex
+        let extractedEmail = text.match(
+            /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
+        );
+
+
+        if(extractedEmail == null) {
+            extractedEmail = "No email found";
+        }
+        else {
+            extractedEmail = extractedEmail.join(", ");
+        }
+
+
+
+        // Replace spaces using string function
+        let modifiedText = text.replace(/\s+/g, "-");
+
+
+
+        // Display Result
+
+        document.getElementById("result").innerHTML =
+        `
+        <b>Email Validation:</b> ${emailStatus}
+        <br><br>
+
+        <b>Text Analysis:</b><br>
+
+        Total Characters: ${charCount}<br>
+
+        Total Words: ${wordCount}<br>
+
+        Uppercase Text: ${upperText}<br>
+
+        Lowercase Text: ${lowerText}<br>
+
+        Modified Text: ${modifiedText}<br><br>
+
+
+        <b>Extracted Numbers:</b> ${numbers}<br>
+
+        <b>Extracted Emails:</b> ${extractedEmail}
+        `;
+
+
+        console.log("Text analysis completed");
+
+
+    }
+
+
+    catch(error) {
+
+        document.getElementById("result").innerHTML =
+        "Error: " + error;
+
+        console.error(error);
+
+    }
+
+}
+
+</script>
+
+
+</body>
+</html>
