@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart Total Calculator</title>
+</head>
+
+<body>
+
+<h1>Shopping Cart Calculator</h1>
+
+<button onclick="calculateCart()">Calculate Total</button>
+
+<h2 id="result"></h2>
+
+
+<script>
+
+function calculateCart() {
+
+
+    // Array of objects (Cart Items)
+    let cart = [
+        {
+            name: "Laptop",
+            price: 50000,
+            quantity: 1
+        },
+
+        {
+            name: "Mouse",
+            price: 1000,
+            quantity: 2
+        },
+
+        {
+            name: "Keyboard",
+            price: 3000,
+            quantity: 1
+        }
+    ];
+
+
+    // map() method - calculate item total
+    let itemTotals = cart.map(item => {
+        return item.price * item.quantity;
+    });
+
+
+    // reduce() method - calculate cart subtotal
+    let subtotal = itemTotals.reduce((sum, value) => {
+        return sum + value;
+    }, 0);
+
+
+    // Discount Logic
+    let discount = 0;
+
+    if(subtotal >= 50000) {
+        discount = subtotal * 0.10;   // 10% discount
+    }
+
+    else if(subtotal >= 20000) {
+        discount = subtotal * 0.05;   // 5% discount
+    }
+
+
+    let finalAmount = subtotal - discount;
+
+
+    // Object handling
+    let bill = {
+        items: cart,
+        subtotal: subtotal,
+        discount: discount,
+        total: finalAmount
+    };
+
+
+    // filter() method - find expensive products
+    let expensiveItems = cart.filter(item => item.price > 5000);
+
+
+    // forEach() method
+    cart.forEach(item => {
+        console.log(
+            item.name + " : ₹" + item.price
+        );
+    });
+
+
+    // Display result
+    document.getElementById("result").innerHTML =
+    `
+    <b>Cart Details</b><br><br>
+
+    Products:
+    <br>
+    ${cart.map(item => 
+        item.name + " - ₹" + item.price + 
+        " × " + item.quantity
+    ).join("<br>")}
+
+    <br><br>
+
+    Subtotal: ₹${bill.subtotal}<br>
+
+    Discount: ₹${bill.discount}<br>
+
+    <b>Final Amount: ₹${bill.total}</b>
+
+    <br><br>
+
+    Expensive Items:
+    ${expensiveItems.map(item => item.name).join(", ")}
+    `;
+
+
+    console.log("Complete Bill Object:", bill);
+
+}
+
+</script>
+
+</body>
+</html>
