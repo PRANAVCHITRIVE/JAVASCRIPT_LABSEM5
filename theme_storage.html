@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Theme Preferences</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .dark {
+            background-color: black;
+            color: white;
+        }
+
+        .light {
+            background-color: white;
+            color: black;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<h1>User Preference Settings</h1>
+
+
+<h3>Select Theme:</h3>
+
+
+<button onclick="changeTheme('light')">
+    Light Theme
+</button>
+
+
+<button onclick="changeTheme('dark')">
+    Dark Theme
+</button>
+
+
+<h3 id="status"></h3>
+
+
+<script>
+
+
+// Function to change and save theme
+
+function changeTheme(theme) {
+
+
+    // Applying theme using DOM
+
+    document.body.className = theme;
+
+
+
+    // Saving preference using localStorage
+
+    localStorage.setItem("preferredTheme", theme);
+
+
+
+    // Saving session information using sessionStorage
+
+    sessionStorage.setItem(
+        "currentSessionTheme",
+        theme
+    );
+
+
+    document.getElementById("status").innerHTML =
+    `
+    Theme Selected: ${theme}<br>
+    Preference saved successfully
+    `;
+
+
+}
+
+
+
+// Load saved theme when page opens
+
+window.onload = function(){
+
+
+    // Retrieve data from localStorage
+
+    let savedTheme =
+    localStorage.getItem("preferredTheme");
+
+
+
+    if(savedTheme){
+
+        document.body.className = savedTheme;
+
+
+        document.getElementById("status")
+        .innerHTML =
+        "Previous theme loaded: " + savedTheme;
+
+    }
+
+
+    else{
+
+        document.body.className = "light";
+
+    }
+
+
+
+    // Retrieve session data
+
+    let sessionTheme =
+    sessionStorage.getItem(
+        "currentSessionTheme"
+    );
+
+
+    console.log(
+        "Session Theme:",
+        sessionTheme
+    );
+
+
+};
+
+
+
+</script>
+
+
+</body>
+
+</html>
