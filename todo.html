@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List App</title>
+
+    <style>
+        li {
+            margin: 10px;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>To-Do List</h1>
+
+<input type="text" id="taskInput" placeholder="Enter task">
+
+<button onclick="addTask()">Add Task</button>
+
+
+<ul id="taskList"></ul>
+
+
+<script>
+
+
+// Add Task Function
+
+function addTask() {
+
+
+    let taskInput = document.getElementById("taskInput");
+
+    let taskValue = taskInput.value;
+
+
+    if(taskValue.trim() === "") {
+
+        alert("Please enter a task");
+
+        return;
+    }
+
+
+
+    // Creating new DOM element
+
+    let li = document.createElement("li");
+
+
+    li.innerHTML = 
+    `
+    ${taskValue}
+
+    <button onclick="editTask(this)">
+        Edit
+    </button>
+
+    <button onclick="deleteTask(this)">
+        Delete
+    </button>
+    `;
+
+
+
+    // Adding element to DOM
+
+    document.getElementById("taskList")
+    .appendChild(li);
+
+
+
+    taskInput.value = "";
+
+}
+
+
+
+// Edit Task Function
+
+function editTask(button) {
+
+
+    // DOM traversal - parent element access
+
+    let li = button.parentElement;
+
+
+    let taskText = prompt(
+        "Edit your task:",
+        li.firstChild.textContent.trim()
+    );
+
+
+    if(taskText != null && taskText.trim() != "") {
+
+        li.firstChild.textContent = taskText;
+
+    }
+
+}
+
+
+
+// Delete Task Function
+
+function deleteTask(button) {
+
+
+    // DOM traversal
+
+    let li = button.parentElement;
+
+
+    // Removing element from DOM
+
+    li.remove();
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
