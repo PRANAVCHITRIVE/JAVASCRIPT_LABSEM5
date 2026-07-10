@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grading System</title>
+</head>
+
+<body>
+
+<h1>Student Grading System</h1>
+
+<label>Enter Student Name:</label>
+<input type="text" id="name">
+<br><br>
+
+<label>Enter Marks (0-100):</label>
+<input type="number" id="marks">
+<br><br>
+
+<button onclick="calculateGrade()">Calculate Grade</button>
+
+<h2 id="result"></h2>
+
+
+<script>
+
+function calculateGrade() {
+
+    // Getting user input
+    let studentName = document.getElementById("name").value;
+    let marks = Number(document.getElementById("marks").value);
+
+
+    // Form Validation
+    if (studentName == "") {
+        document.getElementById("result").innerHTML =
+        "Please enter student name";
+        return;
+    }
+
+    if (marks < 0 || marks > 100 || isNaN(marks)) {
+        document.getElementById("result").innerHTML =
+        "Please enter valid marks between 0 and 100";
+        return;
+    }
+
+
+    // Control Structures for grading
+
+    let grade;
+    let status;
+
+
+    if (marks >= 90) {
+        grade = "A+";
+        status = "Excellent";
+    }
+
+    else if (marks >= 80) {
+        grade = "A";
+        status = "Very Good";
+    }
+
+    else if (marks >= 70) {
+        grade = "B";
+        status = "Good";
+    }
+
+    else if (marks >= 60) {
+        grade = "C";
+        status = "Average";
+    }
+
+    else if (marks >= 40) {
+        grade = "D";
+        status = "Pass";
+    }
+
+    else {
+        grade = "F";
+        status = "Fail";
+    }
+
+
+    // Display Result using template literals
+
+    document.getElementById("result").innerHTML =
+    `
+    Student Name: ${studentName}<br>
+    Marks Obtained: ${marks}<br>
+    Grade: ${grade}<br>
+    Performance: ${status}
+    `;
+
+
+    console.log("Grade calculated successfully");
+}
+
+</script>
+
+</body>
+</html>
