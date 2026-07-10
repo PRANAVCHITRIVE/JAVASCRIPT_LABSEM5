@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>JSON Data Display</title>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+<h1>Student Data</h1>
+
+
+<h2>Using fetch()</h2>
+
+<table border="1" id="fetchTable">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Course</th>
+</tr>
+
+</table>
+
+
+
+<h2>Using jQuery $.getJSON()</h2>
+
+
+<table border="1" id="jqueryTable">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Course</th>
+</tr>
+
+</table>
+
+
+
+
+<script>
+
+
+// JSON file loading using fetch()
+
+fetch("students.json")
+
+.then(response => response.json())
+
+.then(data => {
+
+
+    let table = document.getElementById("fetchTable");
+
+
+    data.forEach(student => {
+
+
+        let row = table.insertRow();
+
+
+        row.innerHTML =
+        `
+        <td>${student.id}</td>
+        <td>${student.name}</td>
+        <td>${student.email}</td>
+        <td>${student.course}</td>
+        `;
+
+
+    });
+
+
+})
+
+.catch(error => {
+
+    console.error(
+        "Error loading JSON:",
+        error
+    );
+
+});
+
+
+
+
+
+// JSON file loading using jQuery $.getJSON()
+
+$.getJSON("students.json", function(data){
+
+
+    let table = $("#jqueryTable");
+
+
+    $.each(data, function(index, student){
+
+
+        table.append(
+
+        `
+        <tr>
+
+        <td>${student.id}</td>
+
+        <td>${student.name}</td>
+
+        <td>${student.email}</td>
+
+        <td>${student.course}</td>
+
+        </tr>
+        `
+
+        );
+
+
+    });
+
+
+})
+
+.fail(function(){
+
+    console.error(
+        "Unable to load JSON data"
+    );
+
+});
+
+
+
+</script>
+
+
+</body>
+
+</html>
