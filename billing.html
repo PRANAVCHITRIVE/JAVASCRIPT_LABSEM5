@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing Calculator</title>
+</head>
+
+<body>
+
+<h1>Billing Calculator</h1>
+
+<label>Product Name:</label>
+<input type="text" id="product"><br><br>
+
+<label>Price:</label>
+<input type="number" id="price"><br><br>
+
+<label>Quantity:</label>
+<input type="number" id="quantity"><br><br>
+
+<button onclick="calculateBill()">Generate Bill</button>
+
+<h2 id="result"></h2>
+
+
+<script>
+
+function calculateBill() {
+
+    // Using var
+    var company = "ABC Store";
+
+    // Using let
+    let productName = document.getElementById("product").value;
+    let price = Number(document.getElementById("price").value);
+    let quantity = Number(document.getElementById("quantity").value);
+
+
+    // Using const
+    const taxRate = 0.18;
+
+
+    // Calculation
+    let total = price * quantity;
+    let tax = total * taxRate;
+    let finalAmount = total + tax;
+
+
+    // Object creation
+    const bill = {
+        productName,
+        price,
+        quantity,
+        total,
+        tax,
+        finalAmount
+    };
+
+
+    // Destructuring
+    const { productName: item, finalAmount: amount } = bill;
+
+
+    // Template literals
+    let billMessage = `
+        Company: ${company}<br>
+        Product: ${item}<br>
+        Price: ₹${price}<br>
+        Quantity: ${quantity}<br>
+        Subtotal: ₹${total}<br>
+        GST (18%): ₹${tax}<br>
+        <b>Total Amount: ₹${amount}</b>
+    `;
+
+
+    document.getElementById("result").innerHTML = billMessage;
+
+
+    console.log("Billing Object:", bill);
+}
+
+</script>
+
+</body>
+</html>
