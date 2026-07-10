@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Gym Admission Form</title>
+
+<style>
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.success {
+    color: green;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>Gym Admission Form</h1>
+
+
+<form id="gymForm">
+
+
+<label>Name:</label>
+<input type="text" id="name">
+<p id="nameError" class="error"></p>
+
+
+<label>Email:</label>
+<input type="text" id="email">
+<p id="emailError" class="error"></p>
+
+
+<label>Age:</label>
+<input type="number" id="age">
+<p id="ageError" class="error"></p>
+
+
+<label>Phone Number:</label>
+<input type="text" id="phone">
+<p id="phoneError" class="error"></p>
+
+
+<label>Membership Plan:</label>
+
+<select id="plan">
+
+<option value="">Select Plan</option>
+<option value="Basic">Basic</option>
+<option value="Premium">Premium</option>
+<option value="VIP">VIP</option>
+
+</select>
+
+<p id="planError" class="error"></p>
+
+
+<br>
+
+<button type="submit">
+Join Gym
+</button>
+
+
+</form>
+
+
+<h2 id="message"></h2>
+
+
+
+<script>
+
+
+// Accessing form fields
+
+let nameField = document.getElementById("name");
+
+let emailField = document.getElementById("email");
+
+let ageField = document.getElementById("age");
+
+let phoneField = document.getElementById("phone");
+
+let planField = document.getElementById("plan");
+
+
+
+
+// Live Name Validation
+
+nameField.addEventListener("input", function(){
+
+    if(nameField.value.length < 3){
+
+        document.getElementById("nameError").innerHTML =
+        "Name must contain at least 3 characters";
+
+    }
+
+    else{
+
+        document.getElementById("nameError").innerHTML =
+        "";
+
+    }
+
+});
+
+
+
+
+// Live Email Validation
+
+emailField.addEventListener("input", function(){
+
+
+    let emailPattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if(!emailPattern.test(emailField.value)){
+
+
+        document.getElementById("emailError").innerHTML =
+        "Enter a valid email";
+
+    }
+
+    else{
+
+        document.getElementById("emailError").innerHTML =
+        "";
+
+    }
+
+
+});
+
+
+
+
+
+// Live Age Validation
+
+ageField.addEventListener("input", function(){
+
+
+    let age = Number(ageField.value);
+
+
+    if(age < 16 || age > 70){
+
+        document.getElementById("ageError").innerHTML =
+        "Age must be between 16 and 70";
+
+    }
+
+    else{
+
+        document.getElementById("ageError").innerHTML =
+        "";
+
+    }
+
+
+});
+
+
+
+
+
+// Live Phone Validation
+
+phoneField.addEventListener("input", function(){
+
+
+    let phonePattern = /^[0-9]{10}$/;
+
+
+    if(!phonePattern.test(phoneField.value)){
+
+
+        document.getElementById("phoneError").innerHTML =
+        "Enter valid 10 digit phone number";
+
+    }
+
+    else{
+
+        document.getElementById("phoneError").innerHTML =
+        "";
+
+    }
+
+});
+
+
+
+
+
+// Form Submit Event
+
+document.getElementById("gymForm")
+.addEventListener("submit", function(event){
+
+
+    event.preventDefault();
+
+
+
+    if(
+        nameField.value &&
+        emailField.value &&
+        ageField.value &&
+        phoneField.value &&
+        planField.value
+    ){
+
+
+        document.getElementById("message")
+        .innerHTML =
+        "Gym Admission Successful ✅";
+
+
+        document.getElementById("message")
+        .className = "success";
+
+
+    }
+
+
+    else{
+
+
+        document.getElementById("message")
+        .innerHTML =
+        "Please fill all required fields ❌";
+
+
+    }
+
+
+});
+
+
+
+</script>
+
+
+</body>
+</html>
