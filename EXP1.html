@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Demonstration</title>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+
+    <!-- Internal JavaScript -->
+    <script>
+        function internalMessage() {
+            console.log("Internal JavaScript executed");
+
+            console.table({
+                Browser: navigator.appName,
+                Platform: navigator.platform,
+                Language: navigator.language
+            });
+
+            console.trace("Trace from internal JavaScript");
+        }
+    </script>
+</head>
+
+<body onload="internalMessage()">
+
+    <h1 id="welcome"></h1>
+
+    <button onclick="showEnvironment()">
+        Show Environment Info
+    </button>
+
+    <!-- Inline JavaScript -->
+    <button onclick="console.log('Inline JavaScript executed')">
+        Test Inline JS
+    </button>
+
+    <p id="info"></p>
+
+</body>
+</html>
